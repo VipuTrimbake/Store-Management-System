@@ -1,0 +1,67 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="User.master.cs" Inherits="NewUIProject.User" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+     <title>User Dashboard</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-witdh, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link type="text/css" rel="stylesheet" href="css/font-awesome.min.css" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&display=swap" rel="stylesheet">
+    <link href="line-awesome-1.3.0/1.3.0/css/line-awesome.css" rel="stylesheet" />
+    <link href="StyleSheet1.css" rel="stylesheet" />
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        var object = { status: false, ele: null };
+        function LogOut(ev) {
+            if (object.status) { return true; };
+
+            swal({
+                title: "Are you sure!",
+                text: "Do you really want to Log out!",
+                icon: "warning",
+                buttons: ["No", "Yes!"],
+            }).then((willDelete) => {
+                if (willDelete) {
+                    object.status = true;
+                    object.ele = ev;
+                    object.ele.click();
+                }
+            });
+            return false;
+        };
+    </script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+          <section id="sidebar">
+        <div class="sidebar-brand">
+            <h2><i class="fa fa-desktop"></i> <span>MyProject</span></h2>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li><asp:LinkButton ID="lnkDashboard" runat="server" OnClick="linkdashboard_Click"><i class="fa fa-desktop"></i> <span>Dashboard</span></asp:LinkButton></li>
+                <li><asp:LinkButton ID="lnkPurchase" runat="server" OnClick="linkorder_Click"><i class="fa fa-users"></i> <span>Orders</span></asp:LinkButton></li>
+                <li><asp:LinkButton ID="lnkOrderCompleted" runat="server" OnClick="lnkOrderCompleted_Click"><i class="fa fa-users"></i> <span>Completed Orders</span></asp:LinkButton></li>
+                <li><asp:LinkButton ID="lnkLogout" runat="server" OnClick="lnkLogout_Click" OnClientClick="return LogOut(this)"><i class="fa fa-sign-out"></i> <span>Logout</span></asp:LinkButton></li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="clear"></div>
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/external.js"></script>
+
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
+</html>
